@@ -1,5 +1,7 @@
 package com.spring.mallapi.todo.service;
 
+import com.spring.common.dto.PageRequestDTO;
+import com.spring.common.dto.PageResponseDTO;
 import com.spring.mallapi.todo.dto.TodoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -25,5 +27,21 @@ public class TodoServiceTests {
 
         Long tno = todoService.register(todoDTO);
         log.info("TNO: {}", tno);
+    }
+
+    @Test
+    public void testGet() {
+        Long tno = 63L;
+        TodoDTO todoDTO = todoService.get(tno);
+        log.info("데이터 : {}", todoDTO);
+    }
+
+    @Test
+    public void testList() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(2).size(10).build();
+
+        PageResponseDTO<TodoDTO> response = todoService.list(pageRequestDTO);
+        log.info("PageResponseDTO : {}", response);
     }
 }
